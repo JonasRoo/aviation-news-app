@@ -116,4 +116,8 @@ media/
 # !**/migrations/__init__.py
 
 # Exclude own jupyter-notebooks
-/exp
+exp/news_endpoints.ipynb
+
+# Exclude newsendpoint specific data
+data/fetch_data.py
+data/parsers.py
