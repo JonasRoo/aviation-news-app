@@ -15,7 +15,7 @@ class Article(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ("source", "title")
+        unique_together = ("source", "title", "link")
 
     def __str__(self):
-        return f"{self.source} published '{self.title} on {self.date_published}'"
+        return f"{self.source} published '{self.title}' on {self.date_published}"
