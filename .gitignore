@@ -119,5 +119,6 @@ media/
 exp/news_endpoints.ipynb
 
 # Exclude newsendpoint specific data
-/data/fetch_data.py
-/data/parsers.py
+**/data/fetch_data.py
+**/data/parsers.py
+data.csv
