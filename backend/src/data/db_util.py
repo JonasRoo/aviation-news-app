@@ -25,12 +25,11 @@ def write_all_articles_to_csv(file_path: str = "./data.csv", query=None):
     articles.columns = list_of_columns
     articles.date_published = pd.to_datetime(articles.date_published).dt.date
 
-    try:
-        articles.to_csv(file_path, index=False, encoding="utf-8-sig")
-    except PermissionError:
-        desired_file_name = os.path.basename(file_path)
-        file_name_components = list(os.path.splitext(desired_file_name))
-        file_name_components[0] = file_name_components[0] + "_new"
-        new_assigned_file_name = "".join(file_name_components)
-        articles.to_csv(new_assigned_file_name, index=False, encoding="utf-8-sig")
+    if os.path.isfile(file_path):
+        from time import time
 
+        directory, file_name = os.path.split(file_path)
+        new_file_name = str(int(time())) + file_name
+        file_path = os.path.join(directory, new_file_name)
+
+    articles.to_csv(file_path, index=False, encoding="utf-8-sig")
