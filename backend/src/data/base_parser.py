@@ -9,7 +9,9 @@ class BaseEndpointParser:
         self.source_name = source_name
 
     def pipe(self, data: Dict[str, str]):
+
         # raise NotImplementedError(f"Subclass needs to overwrite this method!")
+        # V-------- TEMPLATE CODE V--------
         raw_html = self.extract_data_field(data=data)
         soup = BeautifulSoup(raw_html)
         articles = self.extract_and_parse_html_to_articles(soup=soup)
