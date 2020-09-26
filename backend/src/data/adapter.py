@@ -84,7 +84,14 @@ class EndpointAdapter:
             r = self.session.post(url=self.url, data=self.payload, headers=self.headers)
 
         r.raise_for_status()
-        return r.json()
+        # the yielded response can now either be a dict-like object,
+        # or a pure bytes-like object (raw HTML)
+        try:
+            # dict-like response
+            return r.json()
+        except:
+            # raw HTML-like response
+            return r.content
 
     def wait_remaining_time(self, start_time: float, end_time: float) -> None:
         """Waits for a certain amount of time, specified by `self.wait_time`
