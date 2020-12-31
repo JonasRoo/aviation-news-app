@@ -103,6 +103,7 @@ ENV/
 
 .DS_Store
 *.sqlite3
+*.sqlite3-journal
 media/
 *.pyc
 *.db
@@ -114,7 +115,6 @@ media/
 # **/migrations/**
 # !**/migrations
 # !**/migrations/__init__.py
-
 static/
 
 # Exclude own endpoint specific jupyter-notebooks
