@@ -86,6 +86,8 @@ class EndpointAdapter:
         elif self.method == "GET-PUREURL":
             url = self.url + "?" + "&".join([f"{k}={v}" for k, v in self.payload.items()])
             r = self.session.get(url=url, headers=self.headers)
+        else:
+            raise AttributeError(f"Invalid method {self.method}")
 
         r.raise_for_status()
         # the yielded response can now either be a dict-like object,
