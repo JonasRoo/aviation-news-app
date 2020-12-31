@@ -115,6 +115,8 @@ media/
 # !**/migrations
 # !**/migrations/__init__.py
 
+static/
+
 # Exclude own endpoint specific jupyter-notebooks
 exp/news_endpoints.ipynb
 
