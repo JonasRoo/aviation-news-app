@@ -4,7 +4,7 @@ from articles.models import Article
 
 
 class ArticleFilter(filters.FilterSet):
-    date = filters.DateFromToRangeFilter("date_published", label="before")
+    date = filters.DateFromToRangeFilter("date_published")
     source = filters.CharFilter("source", lookup_expr="icontains")
 
     class Meta:
