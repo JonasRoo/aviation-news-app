@@ -5,11 +5,11 @@ class Article(models.Model):
     # REQUIRED FIELDS
     source = models.URLField()
     title = models.CharField(max_length=256)
-    link = models.URLField()
+    link = models.URLField(max_length=512)
     date_published = models.DateTimeField()
     # META DATA
     description = models.CharField(max_length=1024, blank=True, null=True)
-    image = models.URLField(blank=True, null=True)
+    image = models.URLField(blank=True, null=True, max_length=512)
     author = models.CharField(max_length=64, blank=True, null=True)
     # INTERNAL
     date_added = models.DateTimeField(auto_now_add=True)
