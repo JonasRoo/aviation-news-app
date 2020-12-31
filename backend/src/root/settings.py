@@ -124,8 +124,3 @@ USE_TZ = False
 STATIC_URL = "/static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
-
-REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 100,
-}
