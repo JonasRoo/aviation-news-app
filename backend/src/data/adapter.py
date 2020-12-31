@@ -12,7 +12,7 @@ _DEFAULT_BASE_HEADERS = {
     "accept": "application/json, text/javascript, */*; q=0.01",
 }
 _DEFAULT_FIRST_PAGE_NUM = 1
-_VALID_HTTP_METHODS = ("GET", "POST")
+_VALID_HTTP_METHODS = ("GET", "POST", "GET-PUREURL")
 
 
 class EndpointAdapter:
@@ -39,15 +39,15 @@ class EndpointAdapter:
             method (str): one of ("GET", "POST"). Specifies which HTTP-request type to use when contacting the endpoint
             page_arg (Union[str, Tuple[str, int]]): the name of the parameter in `payload` to increment after each request (accessing diff. pages)
                 > (str): only the name of the parameter
-                > (Tuple[str, int]): (name_of_parameter, first_page) 
+                > (Tuple[str, int]): (name_of_parameter, first_page)
             payload (Dict[str, str]): specifies the payload to send in HTTP-request to server. The `page_arg` should be in here!
-            headers (Dict[str, str], optional): The headers to send in HTTP-request. Defaults to _DEFAULT_BASE_HEADERS. 
+            headers (Dict[str, str], optional): The headers to send in HTTP-request. Defaults to _DEFAULT_BASE_HEADERS.
             wait_time (float): Amount of seconds to wait inbetween requests during iteration.
             verbose (bool): Whether or not logging for current status information should be enabled.
 
         Returns:
             EndpointAdapter: An instantiated EndpointAdapter
-        
+
         Raises:
             AttributeError: raised when `method` is not a valid HTTP-request method
         """
@@ -79,9 +79,13 @@ class EndpointAdapter:
             Dict[str, str]: Validated .json() field of HTTP-request
         """
         if self.method == "GET":
+            print(self.url, self.payload)
             r = self.session.get(url=self.url, data=self.payload, headers=self.headers)
         elif self.method == "POST":
             r = self.session.post(url=self.url, data=self.payload, headers=self.headers)
+        elif self.method == "GET-PUREURL":
+            url = self.url + "?" + "&".join([f"{k}={v}" for k, v in self.payload.items()])
+            r = self.session.get(url=url, headers=self.headers)
 
         r.raise_for_status()
         # the yielded response can now either be a dict-like object,
@@ -144,4 +148,3 @@ class EndpointAdapter:
         self.payload[self.page_arg] = self.payload[self.page_arg] + 1
 
         return parsed_articles
-
