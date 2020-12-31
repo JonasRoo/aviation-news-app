@@ -1,5 +1,6 @@
 from typing import Dict, Tuple, Union
 
+import json
 import time
 import requests
 import random
@@ -95,7 +96,7 @@ class EndpointAdapter:
         try:
             # dict-like response
             return r.json()
-        except:
+        except json.decoder.JSONDecodeError:
             # raw HTML-like response
             return r.content
 
