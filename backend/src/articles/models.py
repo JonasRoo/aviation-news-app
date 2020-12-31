@@ -16,6 +16,7 @@ class Article(models.Model):
 
     class Meta:
         unique_together = ("source", "title", "link")
+        ordering = ("-date_published",)
 
     def __str__(self):
-        return f"{self.source} published '{self.title}' on {self.date_published}"
+        return f"{self.source} published {{{self.title}}} on {self.date_published.date()}"
