@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from articles.models import Article
+from articles.models import Article, Source
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -8,7 +8,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = ["source", "title", "link", "date_published", "description", "image", "author"]
 
 
-class ArticleSourceOnlySerializer(serializers.ModelSerializer):
+class SourceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Article
-        fields = ["source"]
+        model = Source
+        fields = ["pk", "name", "base_url", "icon_url"]
