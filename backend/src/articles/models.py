@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Source(models.Model):
+    name = models.CharField(max_length=64)
     base_url = models.URLField(max_length=128)
     icon_url = models.URLField(max_length=512, blank=True, null=True)
 
