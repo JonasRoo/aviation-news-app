@@ -1,8 +1,14 @@
 from django.db import models
 
 
+class Source(models.Model):
+    base_url = models.URLField(max_length=128)
+    icon_url = models.URLField(max_length=512, blank=True, null=True)
+
+
 class Article(models.Model):
     # REQUIRED FIELDS
+    source_internal = models.ForeignKey(to="Source", on_delete=models.SET_NULL, null=True)
     source = models.URLField()
     title = models.CharField(max_length=256)
     link = models.URLField(max_length=512)
