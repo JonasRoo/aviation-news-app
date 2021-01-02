@@ -168,7 +168,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ),
-    "EXCEPTION_HANDLER": "stocksbackend.exceptions.exception_handler",
+    "EXCEPTION_HANDLER": "root.exceptions.exception_handler",
 }
 
 try:

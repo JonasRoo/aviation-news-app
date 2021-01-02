@@ -1,15 +1,20 @@
-from django_filters import rest_framework as filters
+from django_filters import rest_framework as filters, BaseInFilter, NumberFilter
+from django_filters import Filter
+from django_filters.fields import Lookup
 from rest_framework import filters as drf_filters
 from articles.models import Article
 
 
+class NumberInFilter(BaseInFilter, NumberFilter):
+    pass
+
 class ArticleFilter(filters.FilterSet):
-    date = filters.DateFromToRangeFilter("date_published")
-    source = filters.CharFilter("source", lookup_expr="icontains")
+    date = filters.DateFromToRangeFilter("date_published", label="date")
+    source = NumberInFilter(field_name="source_internal", lookup_expr="in")
 
     class Meta:
         model = Article
-        fields = ["source"]
+        fields = ["source", "date"]
 
 
 class FieldsOnlySearchFilter(drf_filters.SearchFilter):
