@@ -10,11 +10,11 @@ class NumberInFilter(BaseInFilter, NumberFilter):
 
 class ArticleFilter(filters.FilterSet):
     date = filters.DateFromToRangeFilter("date_published", label="date")
-    source = NumberInFilter(field_name="source_internal", lookup_expr="in")
+    sources = NumberInFilter(field_name="source_internal__pk", lookup_expr="in")
 
     class Meta:
         model = Article
-        fields = ["source", "date"]
+        fields = ["sources", "date"]
 
 
 class FieldsOnlySearchFilter(drf_filters.SearchFilter):
