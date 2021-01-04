@@ -61,7 +61,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:3000",
+    "http://localhost:3001",
+)
 
 ROOT_URLCONF = "root.urls"
 
@@ -164,9 +168,9 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        # "rest_framework.authentication.TokenAuthentication",
         # "rest_framework.authentication.BasicAuthentication",  # enables simple command line authentication
         "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
     ),
     "EXCEPTION_HANDLER": "root.exceptions.exception_handler",
 }
