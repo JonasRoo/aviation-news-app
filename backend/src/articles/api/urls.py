@@ -1,7 +1,7 @@
 from django.urls import path
 from articles.api.views import ArticleListView, SourceListView
 
-app_name = "api-articles"
+app_name = "articles-api"
 
 urlpatterns = [
     path("list/", ArticleListView.as_view(), name="get-list-of-articles"),

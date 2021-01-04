@@ -13,7 +13,7 @@ from articles.models import Article, Source
 
 class ArticleListView(generics.ListAPIView):
     queryset = Article.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     serializer_class = ArticleSerializer
     pagination_class = ArticlePagination
     filter_backends = (df_filters.DjangoFilterBackend, FieldsOnlySearchFilter)

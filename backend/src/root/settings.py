@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "knox",
     "corsheaders",
     "rest_framework",
     "django_filters",
@@ -66,6 +67,7 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:3000",
     "http://localhost:3001",
 )
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "root.urls"
 
@@ -168,8 +170,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        # "rest_framework.authentication.TokenAuthentication",
-        # "rest_framework.authentication.BasicAuthentication",  # enables simple command line authentication
+        "knox.auth.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
     "EXCEPTION_HANDLER": "root.exceptions.exception_handler",
