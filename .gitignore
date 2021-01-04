@@ -125,3 +125,6 @@ exp/news_endpoints.ipynb
 **/data/parsers.py
 data.csv
 port_sources.py
+
+# User auth
+**/users/api/
