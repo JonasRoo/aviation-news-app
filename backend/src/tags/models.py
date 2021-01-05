@@ -11,6 +11,7 @@ UpperCaseValidator = RegexValidator(
 class EntityType(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=32, validators=(UpperCaseValidator,))
+    definition = models.CharField(max_length=200, blank=True, null=True)
     color = models.CharField(max_length=32, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
@@ -55,4 +56,10 @@ class Tag(models.Model):
     text_field_in_article = models.CharField(max_length=1, choices=ARTICLE_TEXT_FIELD_CHOICES)
     match_from_index = models.IntegerField()
     match_to_index = models.IntegerField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+
+class ArticleTaggedByUser(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
