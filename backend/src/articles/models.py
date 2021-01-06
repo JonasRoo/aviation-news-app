@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Source(models.Model):
@@ -27,3 +28,8 @@ class Article(models.Model):
 
     def __str__(self):
         return f"{self.source} published {{{self.title}}} on {self.date_published.date()}"
+
+
+class Heart(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)

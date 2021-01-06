@@ -4,6 +4,7 @@ from articles.api.views import (
     SourceListView,
     ArticleWithTagsListView,
     ArticleForTaggingListView,
+    HeartView,
 )
 
 app_name = "articles-api"
@@ -17,4 +18,5 @@ urlpatterns = [
         name="get-list-of-articles-user-has-not-tagget",
     ),
     path("sources/", SourceListView.as_view(), name="get-list-of-all-possible-sources"),
+    path("<int:article_id>/heart/", HeartView.as_view(), name="get-list-of-all-possible-sources"),
 ]

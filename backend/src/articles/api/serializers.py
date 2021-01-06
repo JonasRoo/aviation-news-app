@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from articles.models import Article, Source
+from articles.models import Article, Source, Heart
 from tags.api.serializers import TagSerializer
 
 
@@ -64,3 +64,12 @@ class SourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Source
         fields = ["pk", "name", "base_url", "icon_url"]
+
+
+class HeartSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source="user.username", read_only=True)
+    article = BriefArticleSerializer
+
+    class Meta:
+        model = Heart
+        fields = ["user", "article"]
