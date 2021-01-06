@@ -9,6 +9,7 @@ from articles.api.serializers import (
     ArticleSerializer,
     SourceSerializer,
     ArticleWithTagsSerializer,
+    ArticleExperimentalSerializer,
 )
 from articles.api.filters import ArticleFilter, FieldsOnlySearchFilter
 from articles.models import Article, Source, Heart
@@ -18,7 +19,7 @@ from tags.models import ArticleTaggedByUser
 class ArticleListView(generics.ListAPIView):
     queryset = Article.objects.all()
     permission_classes = (IsAuthenticated,)
-    serializer_class = ArticleSerializer
+    serializer_class = ArticleExperimentalSerializer
     pagination_class = ArticlePagination
     filter_backends = (df_filters.DjangoFilterBackend, FieldsOnlySearchFilter)
     filter_class = ArticleFilter
@@ -29,7 +30,7 @@ class ArticleListView(generics.ListAPIView):
 
 class OnlyHeartedArticlesListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = ArticleSerializer
+    serializer_class = ArticleExperimentalSerializer
     pagination_class = ArticlePagination
     filter_backends = (df_filters.DjangoFilterBackend, FieldsOnlySearchFilter)
     filter_class = ArticleFilter
