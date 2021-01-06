@@ -7,6 +7,9 @@ class Source(models.Model):
     base_url = models.URLField(max_length=128)
     icon_url = models.URLField(max_length=512, blank=True, null=True)
 
+    def __str__(self):
+        return f"{self.name} <base={self.base_url}> <icon={self.icon_url}>"
+
 
 class Article(models.Model):
     # REQUIRED FIELDS
@@ -33,3 +36,6 @@ class Article(models.Model):
 class Heart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} hearts <{self.article.title}>"
