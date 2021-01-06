@@ -4,6 +4,7 @@ from articles.api.views import (
     SourceListView,
     ArticleWithTagsListView,
     ArticleForTaggingListView,
+    OnlyHeartedArticlesListView,
     HeartView,
 )
 
@@ -11,7 +12,12 @@ app_name = "articles-api"
 
 urlpatterns = [
     path("list/", ArticleListView.as_view(), name="get-list-of-articles"),
-    path("list/tags/", ArticleWithTagsListView.as_view(), name="get-list-of-articles-with-tags"),
+    path("list/", ArticleListView.as_view(), name="get-list-of-articles"),
+    path(
+        "list/hearted/",
+        OnlyHeartedArticlesListView.as_view(),
+        name="get-list-of-own-hearted-articles",
+    ),
     path(
         "list/notTagged/",
         ArticleForTaggingListView.as_view(),

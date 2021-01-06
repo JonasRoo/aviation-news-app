@@ -27,6 +27,22 @@ class ArticleListView(generics.ListAPIView):
     search_fields = ["title", "description"]
 
 
+class OnlyHeartedArticlesListView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = ArticleSerializer
+    pagination_class = ArticlePagination
+    filter_backends = (df_filters.DjangoFilterBackend, FieldsOnlySearchFilter)
+    filter_class = ArticleFilter
+    # "By default, searches will use case-insensitive partial matches."
+    search_class = FieldsOnlySearchFilter
+    search_fields = ["title", "description"]
+
+    def get_queryset(self):
+        user_hearts = Heart.objects.filter(user=self.request.user).values("article")
+        print(user_hearts)
+        return Article.objects.filter(pk__in=user_hearts)
+
+
 class ArticleWithTagsListView(generics.ListAPIView):
     queryset = Article.objects.all()
     permission_classes = (IsAuthenticated,)
