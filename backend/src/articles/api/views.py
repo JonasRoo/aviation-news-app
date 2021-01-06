@@ -9,7 +9,6 @@ from articles.api.serializers import (
     ArticleSerializer,
     SourceSerializer,
     ArticleWithTagsSerializer,
-    HeartSerializer,
 )
 from articles.api.filters import ArticleFilter, FieldsOnlySearchFilter
 from articles.models import Article, Source, Heart
@@ -74,8 +73,7 @@ class HeartView(APIView):
         try:
             heart = Heart.objects.get(user=user, article=article)
             heart.delete()
-            return Response({"message": f"Heart on article `{article_id}` deleted!"})
+            return Response({"message": f"Successfully unhearted article!"})
         except Heart.DoesNotExist:
             heart = Heart.objects.create(user=user, article=article)
-        serializer = HeartSerializer(heart)
-        return Response(serializer.data)
+            return Response({"message": f"Successfully hearted article!"})
