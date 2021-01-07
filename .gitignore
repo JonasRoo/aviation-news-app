@@ -128,3 +128,5 @@ port_sources.py
 
 # User auth
 **/users/api/
+
+/bin/
