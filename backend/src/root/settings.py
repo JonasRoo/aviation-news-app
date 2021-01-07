@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "celery",
+    "django_celery_beat",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
