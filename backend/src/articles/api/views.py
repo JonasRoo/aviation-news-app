@@ -40,7 +40,6 @@ class OnlyHeartedArticlesListView(generics.ListAPIView):
 
     def get_queryset(self):
         user_hearts = Heart.objects.filter(user=self.request.user).values("article")
-        print(user_hearts)
         return Article.objects.filter(pk__in=user_hearts)
 
 
